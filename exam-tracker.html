@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YKS Coach - Exam Tracker</title>
+    <link rel="stylesheet" href="css/exam-tracker.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo"><i class="fas fa-graduation-cap"></i> YKS Coach</h1>
+            </div>
+            
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <p class="user-name" id="user-name">Loading...</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="./dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="./planner.html"><i class="fa-solid fa-calendar-days"></i> Study Planner</a>
+                <a href="./study-log.html"><i class="fa-solid fa-book"></i> Study Logger</a>
+                <a href="./statistics.html"><i class="fa-solid fa-chart-pie"></i> Statistics</a>
+                <a href="./exam-tracker.html" class="active"><i class="fa-solid fa-file-pen"></i> Exam Tracker</a>
+                <a href="./goals.html"><i class="fa-solid fa-bullseye"></i> Goals</a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="welcome-section">
+                    <h2>Exam Tracker</h2>
+                    <p>Log and track your practice exam results</p>
+                </div>
+            </header>
+            
+            <div class="content-wrapper">
+                <!-- Add New Exam Section -->
+                <section class="add-exam-section">
+                    <div class="section-header">
+                        <h3>Record New Exam Result</h3>
+                    </div>
+                    
+                    <form id="exam-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="exam-name">Exam Name</label>
+                                <input type="text" id="exam-name" name="examName" placeholder="e.g., Brand X - TYT 1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exam-date">Exam Date</label>
+                                <input type="date" id="exam-date" name="examDate" required>
+                            </div>
+                        </div>
+                        
+                        <div class="scores-container">
+                            <h4>Net Scores by Subject</h4>
+                            <div class="scores-grid">
+                                <!-- TYT Scores -->
+                                <div class="score-group">
+                                    <h5>TYT Subjects</h5>
+                                    <div class="score-input-group">
+                                        <label for="tyt-turkish">Turkish</label>
+                                        <div class="input-with-suffix">
+                                            <input type="number" id="tyt-turkish" name="tyt_turkish" placeholder="0.00" step="0.25" min="0" max="40">
+                                            <span class="input-suffix">/40</span>
+                                        </div>
+                                    </div>
+                                    <div class="score-input-group">
+                                        <label for="tyt-social">Social Sciences</label>
+                                        <div class="input-with-suffix">
+                                            <input type="number" id="tyt-social" name="tyt_social" placeholder="0.00" step="0.25" min="0" max="20">
+                                            <span class="input-suffix">/20</span>
+                                        </div>
+                                    </div>
+                                    <div class="score-input-group">
+                                        <label for="tyt-math">Mathematics</label>
+                                        <div class="input-with-suffix">
+                                            <input type="number" id="tyt-math" name="tyt_math" placeholder="0.00" step="0.25" min="0" max="40">
+                                            <span class="input-suffix">/40</span>
+                                        </div>
+                                    </div>
+                                    <div class="score-input-group">
+                                        <label for="tyt-science">Science</label>
+                                        <div class="input-with-suffix">
+                                            <input type="number" id="tyt-science" name="tyt_science" placeholder="0.00" step="0.25" min="0" max="20">
+                                            <span class="input-suffix">/20</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- AYT Scores -->
+                                <div class="score-group">
+                                    <h5>AYT Subjects</h5>
+                                    <div class="score-input-group">
+                                        <label for="ayt-math">Mathematics</label>
+                                        <div class="input-with-suffix">
+                                            <input type="number" id="ayt-math" name="ayt_math" placeholder="0.00" step="0.25" min="0" max="40">
+                                            <span class="input-suffix">/40</span>
+                                        </div>
+                                    </div>
+                                    <div class="score-input-group">
+                                        <label for="ayt-physics">Physics</label>
+                                        <div class="input-with-suffix">
+                                            <input type="number" id="ayt-physics" name="ayt_physics" placeholder="0.00" step="0.25" min="0" max="14">
+                                            <span class="input-suffix">/14</span>
+                                        </div>
+                                    </div>
+                                    <div class="score-input-group">
+                                        <label for="ayt-chemistry">Chemistry</label>
+                                        <div class="input-with-suffix">
+                                            <input type="number" id="ayt-chemistry" name="ayt_chemistry" placeholder="0.00" step="0.25" min="0" max="13">
+                                            <span class="input-suffix">/13</span>
+                                        </div>
+                                    </div>
+                                    <div class="score-input-group">
+                                        <label for="ayt-biology">Biology</label>
+                                        <div class="input-with-suffix">
+                                            <input type="number" id="ayt-biology" name="ayt_biology" placeholder="0.00" step="0.25" min="0" max="13">
+                                            <span class="input-suffix">/13</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Additional AYT Scores -->
+                                <div class="score-group">
+                                    <h5>Additional AYT Subjects</h5>
+                                    <div class="score-input-group">
+                                        <label for="ayt-literature">Literature</label>
+                                        <div class="input-with-suffix">
+                                            <input type="number" id="ayt-literature" name="ayt_literature" placeholder="0.00" step="0.25" min="0" max="24">
+                                            <span class="input-suffix">/24</span>
+                                        </div>
+                                    </div>
+                                    <div class="score-input-group">
+                                        <label for="ayt-history">History</label>
+                                        <div class="input-with-suffix">
+                                            <input type="number" id="ayt-history" name="ayt_history" placeholder="0.00" step="0.25" min="0" max="10">
+                                            <span class="input-suffix">/10</span>
+                                        </div>
+                                    </div>
+                                    <div class="score-input-group">
+                                        <label for="ayt-geography">Geography</label>
+                                        <div class="input-with-suffix">
+                                            <input type="number" id="ayt-geography" name="ayt_geography" placeholder="0.00" step="0.25" min="0" max="6">
+                                            <span class="input-suffix">/6</span>
+                                        </div>
+                                    </div>
+                                    <div class="score-input-group">
+                                        <label for="ayt-philosophy">Philosophy-Religion</label>
+                                        <div class="input-with-suffix">
+                                            <input type="number" id="ayt-philosophy" name="ayt_philosophy" placeholder="0.00" step="0.25" min="0" max="12">
+                                            <span class="input-suffix">/12</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">Save Exam Result</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                
+                <!-- Progress Chart Section -->
+                <section class="progress-chart-section">
+                    <div class="section-header">
+                        <h3>Score Progression</h3>
+                        <div class="chart-controls">
+                            <label for="subject-filter">Subject:</label>
+                            <select id="subject-filter">
+                                <option value="tyt_math">TYT Math</option>
+                                <option value="tyt_turkish">TYT Turkish</option>
+                                <option value="tyt_science">TYT Science</option>
+                                <option value="tyt_social">TYT Social</option>
+                                <option value="ayt_math">AYT Math</option>
+                                <option value="ayt_physics">AYT Physics</option>
+                                <option value="ayt_chemistry">AYT Chemistry</option>
+                                <option value="ayt_biology">AYT Biology</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="scores-chart"></canvas>
+                        <div id="no-chart-data" class="no-data-message" style="display:none;">
+                            <i class="fas fa-chart-line"></i>
+                            <p>Log at least 2 exam results to see your progress chart</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Results Table Section -->
+                <section class="results-table-section">
+                    <div class="section-header">
+                        <h3>Previous Exam Results</h3>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="exams-table" class="exams-table">
+                            <thead>
+                                <tr>
+                                    <th>Exam Name</th>
+                                    <th>Date</th>
+                                    <th>TYT Turkish</th>
+                                    <th>TYT Math</th>
+                                    <th>TYT Science</th>
+                                    <th>TYT Social</th>
+                                    <th>AYT Math</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="exams-table-body">
+                                <!-- Exam results will be added here dynamically -->
+                                <tr class="loading-row">
+                                    <td colspan="8">Loading exam results...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div id="no-exams-message" class="empty-state" style="display:none;">
+                        <img src="https://via.placeholder.com/120" alt="No exams">
+                        <h4>No exam results yet</h4>
+                        <p>Log your first practice exam result above to start tracking your progress</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Exam Details Modal -->
+    <div class="modal" id="exam-details-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-exam-title">Exam Details</h3>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="exam-details-container" id="exam-details-container">
+                    <!-- Details will be filled dynamically -->
+                </div>
+                <div class="modal-actions">
+                    <button id="delete-exam-btn" class="btn-danger">Delete Exam</button>
+                    <button id="close-details-btn" class="btn-secondary">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="delete-confirmation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Delete Exam Result</h3>
+                <button class="close-modal" id="close-confirm-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this exam result?</p>
+                <p id="delete-exam-name" class="delete-confirm-text"></p>
+                <div class="modal-actions">
+                    <button id="cancel-delete" class="btn-secondary">Cancel</button>
+                    <button id="confirm-delete" class="btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="notification-message">Operation successful!</span>
+        </div>
+    </div>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    
+    <!-- Exam Tracker JS -->
+    <script src="js/exam-tracker.js"></script>
+</body>
+</html>

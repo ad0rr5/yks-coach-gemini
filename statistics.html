@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YKS Coach - Statistics</title>
+    <link rel="stylesheet" href="css/statistics.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo"><i class="fas fa-graduation-cap"></i> YKS Coach</h1>
+            </div>
+            
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <p class="user-name" id="user-name">Loading...</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="./dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="./planner.html"><i class="fa-solid fa-calendar-days"></i> Study Planner</a>
+                <a href="./study-log.html"><i class="fa-solid fa-book"></i> Study Logger</a>
+                <a href="./statistics.html" class="active"><i class="fa-solid fa-chart-pie"></i> Statistics</a>
+                <a href="./exam-tracker.html"><i class="fa-solid fa-file-pen"></i> Exam Tracker</a>
+                <a href="./goals.html"><i class="fa-solid fa-bullseye"></i> Goals</a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="welcome-section">
+                    <h2>Statistics</h2>
+                    <p>Visualize your study patterns and progress</p>
+                </div>
+                <div class="header-actions">
+                    <div class="date-filter">
+                        <label for="time-range">Time Range:</label>
+                        <select id="time-range">
+                            <option value="7">Last 7 days</option>
+                            <option value="30">Last 30 days</option>
+                            <option value="90">Last 3 months</option>
+                            <option value="all">All time</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="content-wrapper">
+                <!-- Summary Cards -->
+                <section class="stat-summary">
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <div class="summary-icon total-time">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="summary-details">
+                                <h4>Total Study Time</h4>
+                                <p class="summary-value" id="total-study-hours">0 hours</p>
+                                <p class="summary-subtext">In selected period</p>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-card">
+                            <div class="summary-icon avg-time">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <div class="summary-details">
+                                <h4>Average Daily</h4>
+                                <p class="summary-value" id="avg-daily-time">0 hours</p>
+                                <p class="summary-subtext">In selected period</p>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-card">
+                            <div class="summary-icon sessions">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="summary-details">
+                                <h4>Study Sessions</h4>
+                                <p class="summary-value" id="session-count">0</p>
+                                <p class="summary-subtext">In selected period</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Daily Study Time Chart -->
+                <section class="chart-container daily-chart">
+                    <div class="section-header">
+                        <h3>Daily Study Time</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="dailyStudyBarChart"></canvas>
+                    </div>
+                </section>
+                
+                <!-- Subject Distribution Chart -->
+                <section class="chart-container subjects-chart">
+                    <div class="section-header">
+                        <h3>Subject Distribution</h3>
+                    </div>
+                    <div class="chart-wrapper pie-chart-wrapper">
+                        <canvas id="subjectsPieChart"></canvas>
+                        <div id="pie-chart-legend" class="chart-legend"></div>
+                    </div>
+                </section>
+                
+                <!-- Weekly Progress Chart -->
+                <section class="chart-container weekly-chart">
+                    <div class="section-header">
+                        <h3>Weekly Progress</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="weeklyProgressChart"></canvas>
+                    </div>
+                </section>
+                
+                <!-- Most Studied Topics -->
+                <section class="chart-container topics-container">
+                    <div class="section-header">
+                        <h3>Most Studied Topics</h3>
+                    </div>
+                    <div class="topics-wrapper">
+                        <table class="topics-table" id="topics-table">
+                            <thead>
+                                <tr>
+                                    <th>Topic</th>
+                                    <th>Subject</th>
+                                    <th>Time Spent</th>
+                                    <th>Last Studied</th>
+                                </tr>
+                            </thead>
+                            <tbody id="topics-table-body">
+                                <tr class="loading-row">
+                                    <td colspan="4">Loading data...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="empty-state" id="no-data-message" style="display: none;">
+                <img src="https://via.placeholder.com/150" alt="No data">
+                <h3>No study data available</h3>
+                <p>Start logging your study sessions to see your statistics</p>
+                <a href="dashboard.html" class="btn-primary">Log Study Session</a>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    
+    <!-- Statistics JS -->
+    <script src="js/statistics.js"></script>
+</body>
+</html>

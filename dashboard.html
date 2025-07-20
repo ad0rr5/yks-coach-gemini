@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YKS Coach - Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo"><i class="fas fa-graduation-cap"></i> YKS Coach</h1>
+            </div>
+            
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <p class="user-name" id="user-name">Loading...</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="./dashboard.html" class="active"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="./planner.html"><i class="fa-solid fa-calendar-days"></i> Study Planner</a>
+                <a href="./study-log.html"><i class="fa-solid fa-book"></i> Study Logger</a>
+                <a href="./statistics.html"><i class="fa-solid fa-chart-pie"></i> Statistics</a>
+                <a href="./exam-tracker.html"><i class="fa-solid fa-file-pen"></i> Exam Tracker</a>
+                <a href="./goals.html"><i class="fa-solid fa-bullseye"></i> Goals</a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="welcome-section">
+                    <h2>Dashboard</h2>
+                    <p id="welcome-message">Welcome, <span id="user-email">Student</span>!</p>
+                </div>
+                <div class="header-actions">
+                    <div class="date-display">
+                        <i class="far fa-calendar"></i>
+                        <span id="current-date"></span>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="content-wrapper">
+                <section class="dashboard-summary">
+                    <h3>Today's Overview</h3>
+                    
+                    <div class="stat-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon study-time">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h4>Study Time</h4>
+                                <p class="stat-value" id="total-study-time">0 hours</p>
+                                <p class="stat-subtext">Today's total</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon tasks">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h4>Planned Tasks</h4>
+                                <p class="stat-value">0/0</p>
+                                <p class="stat-subtext">Completed/Total</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon streak">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h4>Study Streak</h4>
+                                <p class="stat-value">0 days</p>
+                                <p class="stat-subtext">Keep it up!</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="dashboard-agenda">
+                    <div class="section-header">
+                        <h3>Today's Study Plan</h3>
+                        <a href="planner.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="empty-state">
+                        <img src="https://via.placeholder.com/120" alt="Empty calendar">
+                        <p>No study sessions planned for today</p>
+                        <a href="planner.html" class="btn-primary">Create Study Plan</a>
+                    </div>
+                </section>
+                
+                <section class="dashboard-recent-activity">
+                    <div class="section-header">
+                        <h3>Recent Activity</h3>
+                        <a href="#" class="view-all" id="view-all-activity">View All <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div id="recent-activity-container">
+                        <!-- Content will be dynamically loaded -->
+                        <div class="empty-state" id="empty-activity">
+                            <img src="https://via.placeholder.com/120" alt="Empty activity">
+                            <p>No recent study activities</p>
+                            <button id="log-study-btn" class="btn-primary">Log Study Session</button>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="dashboard-goals">
+                    <div class="section-header">
+                        <h3>Weekly Goals</h3>
+                        <a href="goals.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="empty-state">
+                        <img src="https://via.placeholder.com/120" alt="Empty goals">
+                        <p>No goals set for this week</p>
+                        <a href="goals.html" class="btn-primary">Set New Goals</a>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Study Logger Modal -->
+    <div class="modal" id="study-logger-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Log Study Session</h3>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="study-log-form">
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected>Choose a subject</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Biology">Biology</option>
+                            <option value="Literature">Literature</option>
+                            <option value="History">History</option>
+                            <option value="Geography">Geography</option>
+                            <option value="Foreign Language">Foreign Language</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="topic">Topic</label>
+                        <input type="text" id="topic" name="topic" placeholder="E.g., Algebra, Thermodynamics" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Duration (minutes)</label>
+                        <input type="number" id="duration" name="duration" min="1" max="720" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notes (Optional)</label>
+                        <textarea id="notes" name="notes" rows="3" placeholder="What did you learn? Any challenges?"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="cancel-log">Cancel</button>
+                        <button type="submit" class="btn-primary" id="save-log">Save Session</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    
+    <!-- Dashboard JS -->
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "yks-coach",
+  "version": "1.0.0",
+  "description": "YKS Coach - Öğrenci YKS hazırlık platformu",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config ai-coach/vite.config.ts",
+    "build": "vite build --config ai-coach/vite.config.ts"
+  },
+  "dependencies": {
+    "@google/genai": "^1.10.0",
+    "@types/node": "^22.14.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "vite": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "typescript": "^5.7.2"
+  }
+}

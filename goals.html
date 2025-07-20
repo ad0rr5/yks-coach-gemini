@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YKS Coach - Goals</title>
+    <link rel="stylesheet" href="css/goals.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo"><i class="fas fa-graduation-cap"></i> YKS Coach</h1>
+            </div>
+            
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <p class="user-name" id="user-name">Loading...</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="./dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="./planner.html"><i class="fa-solid fa-calendar-days"></i> Study Planner</a>
+                <a href="./study-log.html"><i class="fa-solid fa-book"></i> Study Logger</a>
+                <a href="./statistics.html"><i class="fa-solid fa-chart-pie"></i> Statistics</a>
+                <a href="./exam-tracker.html"><i class="fa-solid fa-file-pen"></i> Exam Tracker</a>
+                <a href="./goals.html" class="active"><i class="fa-solid fa-bullseye"></i> Goals</a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="welcome-section">
+                    <h2>Goals</h2>
+                    <p>Set and track your study goals</p>
+                </div>
+            </header>
+            
+            <div class="content-wrapper">
+                <!-- Weekly Goal Section -->
+                <section class="goal-section">
+                    <div class="section-header">
+                        <h3>Weekly Study Goal</h3>
+                        <p class="section-description">Set a target for how many hours you want to study each week</p>
+                    </div>
+                    
+                    <div class="goal-form-container">
+                        <form id="weekly-goal-form">
+                            <div class="form-group">
+                                <label for="weekly-goal-hours">Weekly Goal (hours)</label>
+                                <div class="input-with-buttons">
+                                    <button type="button" class="adjust-btn" id="decrease-goal">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" id="weekly-goal-hours" name="weeklyGoalHours" min="1" max="168" step="0.5" required>
+                                    <button type="button" class="adjust-btn" id="increase-goal">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary" id="set-goal-btn">Set Goal</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+                
+                <!-- Current Progress Section -->
+                <section class="progress-section">
+                    <div class="section-header">
+                        <h3>Current Week Progress</h3>
+                        <p id="week-range">Loading...</p>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-stats">
+                            <div class="progress-value">
+                                <span id="hours-completed">0</span>
+                                <span class="progress-separator">/</span>
+                                <span id="goal-hours">0</span>
+                                <span class="hours-label">hours</span>
+                            </div>
+                            <div class="progress-percentage" id="progress-percentage">0%</div>
+                        </div>
+                        
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="progress-bar"></div>
+                        </div>
+                        
+                        <div class="progress-message" id="progress-message">
+                            Set your weekly goal to start tracking your progress
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Daily Breakdown Section -->
+                <section class="breakdown-section">
+                    <div class="section-header">
+                        <h3>Daily Breakdown</h3>
+                    </div>
+                    
+                    <div class="days-breakdown">
+                        <!-- Days will be populated dynamically -->
+                    </div>
+                </section>
+                
+                <!-- Tips Section -->
+                <section class="tips-section">
+                    <div class="section-header">
+                        <h3>Setting Effective Goals</h3>
+                    </div>
+                    
+                    <div class="tips-container">
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <div class="tip-content">
+                                <h4>Balance is Key</h4>
+                                <p>Set challenging but achievable goals. Aim for steady improvement rather than unrealistic targets.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="tip-content">
+                                <h4>Consistency Matters</h4>
+                                <p>Regular, shorter study sessions are often more effective than occasional marathon sessions.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="tip-content">
+                                <h4>Track Progress</h4>
+                                <p>Regularly review your progress and adjust your goals as needed based on your results.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Success Notification -->
+    <div class="notification" id="success-notification">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="notification-message">Goal updated successfully!</span>
+        </div>
+    </div>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    
+    <!-- Goals JS -->
+    <script src="js/goals.js"></script>
+</body>
+</html>
